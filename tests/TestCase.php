@@ -2,9 +2,9 @@
 
 namespace Gigerit\LaravelCascadeDelete\Tests;
 
+use Gigerit\LaravelCascadeDelete\LaravelCascadeDeleteServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Gigerit\LaravelCascadeDelete\LaravelCascadeDeleteServiceProvider;
 
 class TestCase extends Orchestra
 {

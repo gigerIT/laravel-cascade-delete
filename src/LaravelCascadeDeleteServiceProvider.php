@@ -2,9 +2,9 @@
 
 namespace Gigerit\LaravelCascadeDelete;
 
+use Gigerit\LaravelCascadeDelete\Commands\LaravelCascadeDeleteCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Gigerit\LaravelCascadeDelete\Commands\LaravelCascadeDeleteCommand;
 
 class LaravelCascadeDeleteServiceProvider extends PackageServiceProvider
 {
