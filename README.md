@@ -20,6 +20,11 @@ The main advantage of this package over others is its **unified approach**. Whil
 - **Intelligent Detaching**: Automatically calls `detach()` for many-to-many relations instead of deleting the related models.
 - **Recursive Force Deleting**: Correctly handles `forceDelete()` by propagating it to related models, even those using soft deletes.
 
+## Requirements
+
+- PHP 8.4 or higher
+- Laravel 12.x
+
 ## Installation
 
 You can install the package via composer:
