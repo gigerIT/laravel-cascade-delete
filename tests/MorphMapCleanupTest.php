@@ -37,7 +37,7 @@ it('cleans residual morph relations with custom morph map', function () {
 });
 
 it('cleans residual morph relations via command with custom morph map', function () {
-    config(['cascade-delete.models_paths' => [__DIR__ . '/Models']]);
+    config(['cascade-delete.models_paths' => [__DIR__.'/Models']]);
 
     $post = Post::create(['title' => 'Post via command with Morph Map']);
     $post->images()->create(['url' => 'image-via-command.jpg']);
