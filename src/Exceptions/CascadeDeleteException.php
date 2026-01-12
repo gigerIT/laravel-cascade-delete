@@ -5,7 +5,7 @@ namespace Gigerit\LaravelCascadeDelete\Exceptions;
 use Exception;
 use Illuminate\Support\Str;
 
-class CascadeDeleteException extends Exception
+final class CascadeDeleteException extends Exception
 {
     public static function softDeleteNotImplemented($class)
     {

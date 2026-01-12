@@ -6,6 +6,10 @@ use Gigerit\LaravelCascadeDelete\Concerns\CascadeDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property \Illuminate\Database\Eloquent\Collection|\Gigerit\LaravelCascadeDelete\Tests\Models\Comment[] $comments
+ * @property \Carbon\Carbon|null $deleted_at
+ */
 class Post extends Model
 {
     use CascadeDeletes, SoftDeletes;

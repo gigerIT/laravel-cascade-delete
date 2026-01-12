@@ -151,6 +151,7 @@ trait CascadeDeletes
      */
     protected function isCascadeDeletesForceDeleting(): bool
     {
+        /** @phpstan-ignore function.alreadyNarrowedType */
         return property_exists($this, 'forceDeleting') && $this->forceDeleting;
     }
 
