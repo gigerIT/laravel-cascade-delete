@@ -11,6 +11,7 @@ The main advantage of this package over others is its **unified approach**. Whil
 - **Soft Deletes** (Recursive soft/hard deletion)
 - **Polymorphic Relations** (`MorphOne`, `MorphMany`)
 - **Many-to-Many Relations** (`BelongsToMany`, `MorphToMany`) via automatic detaching
+- **Orphan Cleanup**: Tools to clean residual polymorphic records after bulk deletions
 
 ## Features
 
@@ -83,6 +84,50 @@ class User extends Model
 - **Force Delete**: If you call `$model->forceDelete()`, the package will automatically use `withTrashed()` on the relations to find and permanently delete all related records.
 - **Many-to-Many**: For `BelongsToMany` or `MorphToMany` relations, the package will call `detach()` on the relationship, ensuring the pivot records are removed without deleting the actual related models.
 - **Transactions**: If any deletion fails or the record count doesn't match, the entire operation is rolled back.
+
+## Handling Orphan Polymorphic Relations
+
+Bulk deletes in Laravel (e.g., `User::where('active', false)->delete()`) do not fire model events, which can leave orphaned records in polymorphic relationships. This package provides tools to identify and clean these up.
+
+### Artisan Command
+
+You can clean up all orphaned polymorphic relations defined in your models:
+
+```bash
+php artisan cascade-delete:clean
+```
+
+Use the `--dry-run` flag to see how many records would be deleted without actually removing them:
+
+```bash
+php artisan cascade-delete:clean --dry-run
+```
+
+### Manual Cleanup
+
+You can also trigger cleanup for a specific model class:
+
+```php
+(new User)->clearOrphanMorphRelations();
+```
+
+### Configuration
+
+You can publish the config file to customize where the package searches for models:
+
+```bash
+php artisan vendor:publish --tag="cascade-delete-config"
+```
+
+The default configuration looks for models in `app/`:
+
+```php
+return [
+    'models_paths' => [
+        app_path(),
+    ],
+];
+```
 
 ## Handling Failures
 
