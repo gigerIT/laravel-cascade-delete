@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.1.0...v1.2.0) (2026-01-12)
+
+
+### Features
+
+* add property annotations to Image model for better IDE support ([519b7d5](https://github.com/gigerIT/laravel-cascade-delete/commit/519b7d5dee304534213a32c7084c644639842561))
+
 ## [1.1.0](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.0.3...v1.1.0) (2026-01-12)
 
 
