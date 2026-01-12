@@ -20,7 +20,7 @@ permissions:
 jobs:
   php-code-styling:
     runs-on: ubuntu-latest
-    if: (github.event_name == 'push' || github.event_name == 'pull_request') && !contains(github.event.head_commit.message, 'chore(main): release')
+    if: "(github.event_name == 'push' || github.event_name == 'pull_request') && (github.event.head_commit == null || !contains(github.event.head_commit.message, 'chore(main): release'))"
     timeout-minutes: 5
     steps:
       - name: Checkout code
@@ -39,7 +39,7 @@ jobs:
   phpstan:
     name: PHPStan
     runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request_target' && !contains(github.event.head_commit.message, 'chore(main): release')
+    if: "github.event_name != 'pull_request_target' && (github.event.head_commit == null || !contains(github.event.head_commit.message, 'chore(main): release'))"
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
@@ -58,7 +58,7 @@ jobs:
 
   tests:
     runs-on: ${{ matrix.os }}
-    if: github.event_name != 'pull_request_target' && !contains(github.event.head_commit.message, 'chore(main): release')
+    if: "github.event_name != 'pull_request_target' && (github.event.head_commit == null || !contains(github.event.head_commit.message, 'chore(main): release'))"
     timeout-minutes: 10
     strategy:
       fail-fast: false
@@ -109,7 +109,7 @@ jobs:
   dependabot:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    if: github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]'
+    if: "github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]'"
     steps:
       - name: Dependabot metadata
         id: metadata
@@ -118,14 +118,14 @@ jobs:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Auto-merge Dependabot PRs for semver-minor updates
-        if: steps.metadata.outputs.update-type == 'version-update:semver-minor'
+        if: "steps.metadata.outputs.update-type == 'version-update:semver-minor'"
         run: gh pr merge --auto --merge "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Auto-merge Dependabot PRs for semver-patch updates
-        if: steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        if: "steps.metadata.outputs.update-type == 'version-update:semver-patch'"
         run: gh pr merge --auto --merge "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
@@ -134,7 +134,7 @@ jobs:
   release:
     needs: [phpstan, tests]
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: "github.event_name == 'push' && github.ref == 'refs/heads/main'"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
