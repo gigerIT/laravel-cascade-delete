@@ -16,10 +16,6 @@ class LaravelCascadeDeleteServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-cascade-delete')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigration('create_laravel_cascade_delete_table')
-            ->hasCommand(LaravelCascadeDeleteCommand::class);
+            ->name('laravel-cascade-delete');
     }
 }
