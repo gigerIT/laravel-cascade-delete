@@ -16,9 +16,6 @@ trait CascadeDeletes
     /**
      * Boot the trait.
      *
-     * Listen for the deleting event of a model, and run
-     * the delete operation for any configured relationship methods.
-     *
      * @return void
      */
     protected static function bootCascadeDeletes()
@@ -33,7 +30,7 @@ trait CascadeDeletes
     }
 
     /**
-     * Validate that the calling model is correctly setup for cascading deletes.
+     * Validate the cascading relationship definitions.
      *
      * @return void
      *
@@ -47,7 +44,7 @@ trait CascadeDeletes
     }
 
     /**
-     * Run the cascading deletes for this model.
+     * Run the cascading deletes for the model.
      *
      * @return void
      */
@@ -63,6 +60,8 @@ trait CascadeDeletes
     /**
      * Cascade delete the given relationship.
      *
+     * @param  string  $relationshipName
+     * @param  bool  $forceDeleting
      * @return void
      *
      * @throws \LogicException
@@ -87,8 +86,10 @@ trait CascadeDeletes
     }
 
     /**
-     * Handle cascading for BelongsToMany relationships (detach).
+     * Handle the deletion of a "belongs to many" relationship.
      *
+     * @param  string  $relationshipName
+     * @param  \Illuminate\Database\Eloquent\Relations\BelongsToMany  $relation
      * @return void
      */
     protected function handleBelongsToManyDeletion(string $relationshipName, BelongsToMany $relation)
@@ -100,8 +101,11 @@ trait CascadeDeletes
     }
 
     /**
-     * Handle cascading for HasOneOrMany relationships (delete/forceDelete).
+     * Handle the deletion of "has one" or "has many" relationships.
      *
+     * @param  string  $relationshipName
+     * @param  \Illuminate\Database\Eloquent\Relations\HasOneOrMany  $relation
+     * @param  string  $deleteMethod
      * @return void
      */
     protected function handleHasOneOrManyDeletion(string $relationshipName, HasOneOrMany $relation, string $deleteMethod)
@@ -127,8 +131,11 @@ trait CascadeDeletes
     }
 
     /**
-     * Verify that the number of deleted records matches expectations.
+     * Verify the number of deleted records matches the expected count.
      *
+     * @param  string  $relationshipName
+     * @param  int  $expected
+     * @param  int  $deleted
      * @return void
      *
      * @throws \LogicException
@@ -148,6 +155,8 @@ trait CascadeDeletes
 
     /**
      * Determine if the cascading delete should be a force delete.
+     *
+     * @return bool
      */
     protected function isCascadeDeletesForceDeleting(): bool
     {
@@ -156,7 +165,9 @@ trait CascadeDeletes
     }
 
     /**
-     * Determine if the current model has any invalid cascading relationships defined.
+     * Get the invalid cascading relationship definitions.
+     *
+     * @return array
      */
     protected function hasInvalidCascadingRelationships(): array
     {
@@ -166,7 +177,9 @@ trait CascadeDeletes
     }
 
     /**
-     * Fetch the defined cascading deletes for this model.
+     * Get the cascading relationship definitions.
+     *
+     * @return array
      */
     protected function getCascadingDeletes(): array
     {
