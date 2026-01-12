@@ -20,7 +20,7 @@ permissions:
 jobs:
   php-code-styling:
     runs-on: ubuntu-latest
-    if: ${{ (github.event_name == 'push' || github.event_name == 'pull_request') && !contains(github.event.head_commit.message, 'chore(main): release') }}
+    if: (github.event_name == 'push' || github.event_name == 'pull_request') && !contains(github.event.head_commit.message, 'chore(main): release')
     timeout-minutes: 5
     steps:
       - name: Checkout code
@@ -39,7 +39,7 @@ jobs:
   phpstan:
     name: PHPStan
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request_target' && !contains(github.event.head_commit.message, 'chore(main): release') }}
+    if: github.event_name != 'pull_request_target' && !contains(github.event.head_commit.message, 'chore(main): release')
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
@@ -58,22 +58,26 @@ jobs:
 
   tests:
     runs-on: ${{ matrix.os }}
-    if: ${{ github.event_name != 'pull_request_target' && !contains(github.event.head_commit.message, 'chore(main): release') }}
+    if: github.event_name != 'pull_request_target' && !contains(github.event.head_commit.message, 'chore(main): release')
     timeout-minutes: 10
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        php: [8.4, 8.3]
-        laravel: [12.*, 11.*]
+        php: ['8.4']
+        laravel: ['12.*', '11.*']
         stability: [prefer-lowest, prefer-stable]
         include:
-          - laravel: 12.*
-            testbench: 10.*
-          - laravel: 11.*
-            testbench: 9.*
+          - laravel: '12.*'
+            testbench: '10.*'
+          - laravel: '11.*'
+            testbench: '9.*'
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - name: Checkout code
@@ -130,7 +134,7 @@ jobs:
   release:
     needs: [phpstan, tests]
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && (success() || contains(github.event.head_commit.message, 'chore(main): release')) }}
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
