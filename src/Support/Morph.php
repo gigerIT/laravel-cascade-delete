@@ -20,9 +20,24 @@ class Morph
     public function clearOrphanAllModels(bool $dryRun = false): int
     {
         $numRowsDeleted = 0;
+        $uniqueRelations = [];
 
         foreach ($this->getCascadeDeleteModels() as $model) {
-            $numRowsDeleted += $this->clearOrphanByModel($model, $dryRun);
+            foreach ($this->getValidMorphRelationsFromModel($model) as $relation) {
+                [$childTable, $childFieldType, $childFieldId] = $this->getStructureMorphRelation($relation);
+                $key = implode(':', [$model->getMorphClass(), $childTable, $childFieldType, $childFieldId]);
+
+                if (! isset($uniqueRelations[$key])) {
+                    $uniqueRelations[$key] = [
+                        'model' => $model,
+                        'relation' => $relation,
+                    ];
+                }
+            }
+        }
+
+        foreach ($uniqueRelations as $data) {
+            $numRowsDeleted += $this->queryClearOrphan($data['model'], $data['relation'], $dryRun);
         }
 
         return $numRowsDeleted;
