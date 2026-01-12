@@ -36,6 +36,7 @@ trait CascadeDeletes
      * Validate that the calling model is correctly setup for cascading deletes.
      *
      * @return void
+     *
      * @throws \Gigerit\LaravelCascadeDelete\Exceptions\CascadeDeleteException
      */
     protected function validateCascadingDeletes()
@@ -62,9 +63,8 @@ trait CascadeDeletes
     /**
      * Cascade delete the given relationship.
      *
-     * @param  string  $relationshipName
-     * @param  bool  $forceDeleting
      * @return void
+     *
      * @throws \LogicException
      */
     protected function cascadeDeletes(string $relationshipName, bool $forceDeleting)
@@ -89,8 +89,6 @@ trait CascadeDeletes
     /**
      * Handle cascading for BelongsToMany relationships (detach).
      *
-     * @param  string  $relationshipName
-     * @param  \Illuminate\Database\Eloquent\Relations\BelongsToMany  $relation
      * @return void
      */
     protected function handleBelongsToManyDeletion(string $relationshipName, BelongsToMany $relation)
@@ -104,9 +102,6 @@ trait CascadeDeletes
     /**
      * Handle cascading for HasOneOrMany relationships (delete/forceDelete).
      *
-     * @param  string  $relationshipName
-     * @param  \Illuminate\Database\Eloquent\Relations\HasOneOrMany  $relation
-     * @param  string  $deleteMethod
      * @return void
      */
     protected function handleHasOneOrManyDeletion(string $relationshipName, HasOneOrMany $relation, string $deleteMethod)
@@ -134,10 +129,8 @@ trait CascadeDeletes
     /**
      * Verify that the number of deleted records matches expectations.
      *
-     * @param  string  $relationshipName
-     * @param  int  $expected
-     * @param  int  $deleted
      * @return void
+     *
      * @throws \LogicException
      */
     protected function verifyDeletionCount(string $relationshipName, int $expected, int $deleted)
@@ -155,8 +148,6 @@ trait CascadeDeletes
 
     /**
      * Determine if the cascading delete should be a force delete.
-     *
-     * @return bool
      */
     protected function isCascadeDeletesForceDeleting(): bool
     {
@@ -165,8 +156,6 @@ trait CascadeDeletes
 
     /**
      * Determine if the current model has any invalid cascading relationships defined.
-     *
-     * @return array
      */
     protected function hasInvalidCascadingRelationships(): array
     {
@@ -177,8 +166,6 @@ trait CascadeDeletes
 
     /**
      * Fetch the defined cascading deletes for this model.
-     *
-     * @return array
      */
     protected function getCascadingDeletes(): array
     {

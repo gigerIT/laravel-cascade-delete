@@ -1,10 +1,10 @@
 <?php
 
-use Gigerit\LaravelCascadeDelete\Tests\Models\User;
-use Gigerit\LaravelCascadeDelete\Tests\Models\Post;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Comment;
-use Gigerit\LaravelCascadeDelete\Tests\Models\Role;
+use Gigerit\LaravelCascadeDelete\Tests\Models\Post;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Profile;
+use Gigerit\LaravelCascadeDelete\Tests\Models\Role;
+use Gigerit\LaravelCascadeDelete\Tests\Models\User;
 
 it('cascades deletes to hasOne relationships', function () {
     $user = User::create(['name' => 'John Doe']);

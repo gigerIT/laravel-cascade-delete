@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model
 {
-    use SoftDeletes, CascadeDeletes;
+    use CascadeDeletes, SoftDeletes;
 
     protected $guarded = [];
 
