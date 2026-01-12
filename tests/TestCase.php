@@ -28,10 +28,48 @@ class TestCase extends Orchestra
     {
         config()->set('database.default', 'testing');
 
-        /*
-         foreach (\Illuminate\Support\Facades\File::allFiles(__DIR__ . '/../database/migrations') as $migration) {
-            (include $migration->getRealPath())->up();
-         }
-         */
+        $app['db']->connection()->getSchemaBuilder()->create('users', function ($table) {
+            $table->id();
+            $table->string('name');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+        $app['db']->connection()->getSchemaBuilder()->create('profiles', function ($table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('bio');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+        $app['db']->connection()->getSchemaBuilder()->create('posts', function ($table) {
+            $table->id();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->string('title');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+        $app['db']->connection()->getSchemaBuilder()->create('comments', function ($table) {
+            $table->id();
+            $table->foreignId('post_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->string('body');
+            $table->softDeletes();
+            $table->timestamps();
+        });
+
+        $app['db']->connection()->getSchemaBuilder()->create('roles', function ($table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        $app['db']->connection()->getSchemaBuilder()->create('role_user', function ($table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('role_id')->constrained()->cascadeOnDelete();
+            $table->timestamps();
+        });
     }
 }
