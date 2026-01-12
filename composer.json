@@ -24,7 +24,7 @@
         "laravel/pint": "^1.14",
         "nunomaduro/collision": "^8.8",
         "larastan/larastan": "^3.0",
-        "orchestra/testbench": "^10.0.0||^9.0.0",
+        "orchestra/testbench": "^10.8||^9.6",
         "pestphp/pest": "^4.0",
         "pestphp/pest-plugin-arch": "^4.0",
         "pestphp/pest-plugin-laravel": "^4.0",
@@ -34,8 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Gigerit\\LaravelCascadeDelete\\": "src/",
-            "Gigerit\\LaravelCascadeDelete\\Database\\Factories\\": "database/factories/"
+            "Gigerit\\LaravelCascadeDelete\\": "src/"
         }
     },
     "autoload-dev": {
