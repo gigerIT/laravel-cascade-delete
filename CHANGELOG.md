@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.1.0](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.0.3...v1.1.0) (2026-01-12)
+
+
+### Features
+
+* add CascadeDeleteCleanCommand and support for cleaning residual polymorphic relationships ([b37db7f](https://github.com/gigerIT/laravel-cascade-delete/commit/b37db7f39e8ca48c18c49e16bc92389d6b6546b5))
+* add tests for cascading deletes and morph relationships ([8245ab4](https://github.com/gigerIT/laravel-cascade-delete/commit/8245ab4f1fcfdcdd5be36badcd008d79413cbecb))
+* optimize orphan clearing for morph relationships ([93dba31](https://github.com/gigerIT/laravel-cascade-delete/commit/93dba31a91ea46330a1524ad24340d5b5dcc48ae))
+
+
+### Bug Fixes
+
+* improve cascade delete handling and test reliability ([817623c](https://github.com/gigerIT/laravel-cascade-delete/commit/817623c61d4f7f1511a93c5c5fd166c793d5a5b5))
+
+
+### Miscellaneous Chores
+
+* remove author email from composer.json ([e83064f](https://github.com/gigerIT/laravel-cascade-delete/commit/e83064f3af6c2f0128311e3db2cffef50d511ee3))
+* update dependencies and documentation for Laravel 12 support ([7220d6b](https://github.com/gigerIT/laravel-cascade-delete/commit/7220d6b23ea0a3cabc554efb79f1fba268a286ce))
+
 ## [1.0.3](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.0.2...v1.0.3) (2026-01-12)
 
 
