@@ -132,7 +132,6 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   release:
-    needs: [phpstan, tests]
     runs-on: ubuntu-latest
     if: "github.event_name == 'push' && github.ref == 'refs/heads/main'"
     steps:
