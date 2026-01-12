@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.0.0...v1.0.1) (2026-01-12)
+
+
+### Bug Fixes
+
+* remove dependency on previous jobs in CI workflow ([a03eae6](https://github.com/gigerIT/laravel-cascade-delete/commit/a03eae674ae9819a798b2cf932dd27c5c917b1c4))
+
 ## 1.0.0 (2026-01-12)
 
 
