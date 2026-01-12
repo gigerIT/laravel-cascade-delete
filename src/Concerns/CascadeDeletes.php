@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Gigerit\LaravelCascadeDelete\Concerns;
 
 use Gigerit\LaravelCascadeDelete\Exceptions\CascadeDeleteException;
+use Gigerit\LaravelCascadeDelete\Support\Morph;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use LogicException;
 
 trait CascadeDeletes
 {
@@ -74,7 +74,7 @@ trait CascadeDeletes
         } elseif ($relation instanceof HasOneOrMany) {
             $this->handleHasOneOrManyDeletion($relationshipName, $relation, $deleteMethod);
         } else {
-            throw new LogicException(sprintf(
+            throw new \LogicException(sprintf(
                 '[%s]: error occurred deleting [%s]. Relation type [%s] not handled.',
                 static::class,
                 $relationshipName,
@@ -105,7 +105,7 @@ trait CascadeDeletes
     {
         $query = $relation;
 
-        if ($deleteMethod === 'forceDelete' && method_exists($query, 'withTrashed')) {
+        if ($deleteMethod === 'forceDelete' && method_exists($relation->getRelated(), 'bootSoftDeletes')) {
             $query = $query->withTrashed();
         }
 
@@ -133,7 +133,7 @@ trait CascadeDeletes
     protected function verifyDeletionCount(string $relationshipName, int $expected, int $deleted)
     {
         if ($deleted !== $expected) {
-            throw new LogicException(sprintf(
+            throw new \LogicException(sprintf(
                 '[%s]: error occurred deleting [%s]. Deleted [%d] out of [%d] records.',
                 static::class,
                 $relationshipName,
@@ -165,8 +165,16 @@ trait CascadeDeletes
     /**
      * Get the cascading relationship definitions.
      */
-    protected function getCascadingDeletes(): array
+    public function getCascadingDeletes(): array
     {
         return isset($this->cascadeDeletes) ? (array) $this->cascadeDeletes : [];
+    }
+
+    /**
+     * Clean residual polymorphic relationships for this model.
+     */
+    public function clearOrphanMorphRelations(bool $dryRun = false): int
+    {
+        return (new Morph())->clearOrphanByModel($this, $dryRun);
     }
 }

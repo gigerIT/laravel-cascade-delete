@@ -1,6 +1,7 @@
 <?php
 
-// config for Gigerit/LaravelCascadeDelete
 return [
-
+    'models_paths' => [
+        app_path(),
+    ],
 ];
