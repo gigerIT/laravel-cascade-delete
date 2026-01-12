@@ -1,7 +1,7 @@
 # Laravel Cascade Delete
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/gigerit/laravel-cascade-delete.svg?style=flat-square)](https://packagist.org/packages/gigerit/laravel-cascade-delete)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/gigerit/laravel-cascade-delete/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/gigerit/laravel-cascade-delete/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/gigerit/laravel-cascade-delete/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/gigerit/laravel-cascade-delete/actions?query=workflow%3ACI+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/gigerit/laravel-cascade-delete.svg?style=flat-square)](https://packagist.org/packages/gigerit/laravel-cascade-delete)
 
 Smart cascading deletes for Laravel Eloquent with support for soft deletes, polymorphic relations, and automatic detaching.
