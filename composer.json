@@ -1,6 +1,6 @@
 {
     "name": "gigerit/laravel-cascade-delete",
-    "description": "Cascading deletes for Eloquent models that implements all variants (soft deletes, simple relations, polymorph relations)",
+    "description": "Smart cascading deletes for Laravel Eloquent with support for soft deletes, polymorphic relations, and automatic detaching.",
     "keywords": [
         "gigerit",
         "laravel",

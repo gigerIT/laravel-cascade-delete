@@ -4,7 +4,7 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/gigerit/laravel-cascade-delete/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/gigerit/laravel-cascade-delete/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/gigerit/laravel-cascade-delete.svg?style=flat-square)](https://packagist.org/packages/gigerit/laravel-cascade-delete)
 
-Cascading deletes for Eloquent models that implements all variants (soft deletes, simple relations, polymorph relations). 
+Smart cascading deletes for Laravel Eloquent with support for soft deletes, polymorphic relations, and automatic detaching.
 
 The main advantage of this package over others is its **unified approach**. While many packages handle only soft deletes or only standard relations, this package provides a single trait that intelligently manages all variants:
 - **Standard Relations** (`HasOne`, `HasMany`)
