@@ -9,12 +9,12 @@ final class CascadeDeleteException extends Exception
 {
     public static function softDeleteNotImplemented($class)
     {
-        return new static(sprintf('%s does not implement Illuminate\Database\Eloquent\SoftDeletes', $class));
+        return new self(sprintf('%s does not implement Illuminate\Database\Eloquent\SoftDeletes', $class));
     }
 
     public static function invalidRelationships($relationships)
     {
-        return new static(sprintf(
+        return new self(sprintf(
             '%s [%s] must exist and return an object of type Illuminate\Database\Eloquent\Relations\Relation',
             Str::plural('Relationship', count($relationships)),
             implode(', ', $relationships)

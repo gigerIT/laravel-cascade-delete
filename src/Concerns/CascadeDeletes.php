@@ -60,8 +60,6 @@ trait CascadeDeletes
     /**
      * Cascade delete the given relationship.
      *
-     * @param  string  $relationshipName
-     * @param  bool  $forceDeleting
      * @return void
      *
      * @throws \LogicException
@@ -88,8 +86,6 @@ trait CascadeDeletes
     /**
      * Handle the deletion of a "belongs to many" relationship.
      *
-     * @param  string  $relationshipName
-     * @param  \Illuminate\Database\Eloquent\Relations\BelongsToMany  $relation
      * @return void
      */
     protected function handleBelongsToManyDeletion(string $relationshipName, BelongsToMany $relation)
@@ -103,9 +99,6 @@ trait CascadeDeletes
     /**
      * Handle the deletion of "has one" or "has many" relationships.
      *
-     * @param  string  $relationshipName
-     * @param  \Illuminate\Database\Eloquent\Relations\HasOneOrMany  $relation
-     * @param  string  $deleteMethod
      * @return void
      */
     protected function handleHasOneOrManyDeletion(string $relationshipName, HasOneOrMany $relation, string $deleteMethod)
@@ -133,9 +126,6 @@ trait CascadeDeletes
     /**
      * Verify the number of deleted records matches the expected count.
      *
-     * @param  string  $relationshipName
-     * @param  int  $expected
-     * @param  int  $deleted
      * @return void
      *
      * @throws \LogicException
@@ -155,8 +145,6 @@ trait CascadeDeletes
 
     /**
      * Determine if the cascading delete should be a force delete.
-     *
-     * @return bool
      */
     protected function isCascadeDeletesForceDeleting(): bool
     {
@@ -166,8 +154,6 @@ trait CascadeDeletes
 
     /**
      * Get the invalid cascading relationship definitions.
-     *
-     * @return array
      */
     protected function hasInvalidCascadingRelationships(): array
     {
@@ -178,8 +164,6 @@ trait CascadeDeletes
 
     /**
      * Get the cascading relationship definitions.
-     *
-     * @return array
      */
     protected function getCascadingDeletes(): array
     {
