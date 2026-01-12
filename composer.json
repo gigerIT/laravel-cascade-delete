@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "gigerit/laravel-cascade-delete",
+    "description": "Cascading deletes for Eloquent models that implements all variants (soft deletes, simple relations, polymorph relations)",
     "keywords": [
-        ":vendor_name",
+        "gigerit",
         "laravel",
-        ":package_slug"
+        "laravel-cascade-delete"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/gigerit/laravel-cascade-delete",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "gigerit",
+            "email": "info@gigerit.ch",
             "role": "Developer"
         }
     ],
@@ -30,18 +30,17 @@
         "pestphp/pest-plugin-laravel": "^4.0",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan-deprecation-rules": "^2.0",
-        "phpstan/phpstan-phpunit": "^2.0",
-        "spatie/laravel-ray": "^1.35"
+        "phpstan/phpstan-phpunit": "^2.0"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Gigerit\\LaravelCascadeDelete\\": "src/",
+            "Gigerit\\LaravelCascadeDelete\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
+            "Gigerit\\LaravelCascadeDelete\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -63,10 +62,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Gigerit\\LaravelCascadeDelete\\LaravelCascadeDeleteServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "LaravelCascadeDelete": "Gigerit\\LaravelCascadeDelete\\Facades\\LaravelCascadeDelete"
             }
         }
     },

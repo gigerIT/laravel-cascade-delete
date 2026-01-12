@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Gigerit\LaravelCascadeDelete\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelCascadeDeleteCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-cascade-delete';
 
     public $description = 'My command';
 
