@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.0.1...v1.0.2) (2026-01-12)
+
+
+### Miscellaneous Chores
+
+* update GitHub Actions badge in README.md ([a73c4f9](https://github.com/gigerIT/laravel-cascade-delete/commit/a73c4f9b1ea1cd4298fa4f0c59c016615ffee203))
+
 ## [1.0.1](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.0.0...v1.0.1) (2026-01-12)
 
 
