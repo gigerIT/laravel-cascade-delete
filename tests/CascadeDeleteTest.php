@@ -1,6 +1,7 @@
 <?php
 
 use Gigerit\LaravelCascadeDelete\Tests\Models\Comment;
+use Gigerit\LaravelCascadeDelete\Tests\Models\Image;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Post;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Profile;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Role;
@@ -68,4 +69,29 @@ it('detaches belongsToMany relationships', function () {
     $user->delete();
 
     expect(DB::table('role_user')->where('user_id', $user->id)->count())->toBe(0);
+});
+
+it('cascades deletes to morphMany relationships', function () {
+    $post = Post::create(['title' => 'Post 1']);
+    $post->images()->create(['url' => 'image1.jpg']);
+    $post->images()->create(['url' => 'image2.jpg']);
+
+    expect($post->images()->count())->toBe(2);
+
+    $post->delete();
+
+    expect(Post::find($post->id))->toBeNull();
+    expect(Image::where('imageable_id', $post->id)->where('imageable_type', Post::class)->count())->toBe(0);
+});
+
+it('leaves orphans on bulk delete', function () {
+    $post = Post::create(['title' => 'Post 1']);
+    $post->images()->create(['url' => 'image1.jpg']);
+
+    // Bulk delete does NOT fire events
+    Post::where('id', $post->id)->delete();
+
+    expect(Post::find($post->id))->toBeNull();
+    // This should fail (it should have orphans)
+    expect(Image::where('imageable_id', $post->id)->where('imageable_type', Post::class)->count())->toBe(1);
 });

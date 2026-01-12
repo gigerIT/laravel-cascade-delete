@@ -13,7 +13,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Gigerit\\LaravelCascadeDelete\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn(string $modelName) => 'Gigerit\\LaravelCascadeDelete\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
@@ -69,6 +69,13 @@ class TestCase extends Orchestra
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('role_id')->constrained()->cascadeOnDelete();
+            $table->timestamps();
+        });
+
+        $app['db']->connection()->getSchemaBuilder()->create('images', function ($table) {
+            $table->id();
+            $table->string('url');
+            $table->morphs('imageable');
             $table->timestamps();
         });
     }

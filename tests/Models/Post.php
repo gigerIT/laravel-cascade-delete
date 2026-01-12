@@ -16,7 +16,7 @@ class Post extends Model
 
     protected $guarded = [];
 
-    protected $cascadeDeletes = ['comments'];
+    protected $cascadeDeletes = ['comments', 'images'];
 
     public function user()
     {
@@ -26,5 +26,10 @@ class Post extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }
