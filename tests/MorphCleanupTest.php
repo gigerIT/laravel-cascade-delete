@@ -17,7 +17,7 @@ it('cleans residual morph relations for a specific model instance', function () 
     expect(Image::count())->toBe(2);
 
     // Clean orphans
-    $deleted = (new Post())->clearOrphanMorphRelations();
+    $deleted = (new Post)->clearOrphanMorphRelations();
 
     expect($deleted)->toBe(2);
     expect(Image::count())->toBe(0);
@@ -25,7 +25,7 @@ it('cleans residual morph relations for a specific model instance', function () 
 
 it('cleans residual morph relations via command', function () {
     // Setup: point to our test models directory
-    config(['cascade-delete.models_paths' => [__DIR__ . '/Models']]);
+    config(['cascade-delete.models_paths' => [__DIR__.'/Models']]);
 
     $post = Post::create(['title' => 'Post 1']);
     $post->images()->create(['url' => 'image1.jpg']);
@@ -39,7 +39,7 @@ it('cleans residual morph relations via command', function () {
 });
 
 it('reports residual morph relations via command dry-run', function () {
-    config(['cascade-delete.models_paths' => [__DIR__ . '/Models']]);
+    config(['cascade-delete.models_paths' => [__DIR__.'/Models']]);
 
     $post = Post::create(['title' => 'Post 1']);
     $post->images()->create(['url' => 'image1.jpg']);

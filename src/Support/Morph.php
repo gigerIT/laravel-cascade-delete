@@ -56,8 +56,8 @@ class Morph
         foreach (get_declared_classes() as $class) {
             if (in_array(CascadeDeletes::class, class_uses_recursive($class), true)) {
                 $reflection = new \ReflectionClass($class);
-                if (!$reflection->isAbstract() && $reflection->isSubclassOf(Model::class)) {
-                    $models[] = new $class();
+                if (! $reflection->isAbstract() && $reflection->isSubclassOf(Model::class)) {
+                    $models[] = new $class;
                 }
             }
         }
@@ -77,7 +77,7 @@ class Morph
             ->whereNotExists(function ($query) use ($parentModel, $childTable, $childFieldId) {
                 $query->select(DB::raw(1))
                     ->from($parentModel->getTable())
-                    ->whereColumn($parentModel->getTable() . '.' . $parentModel->getKeyName(), '=', $childTable . '.' . $childFieldId);
+                    ->whereColumn($parentModel->getTable().'.'.$parentModel->getKeyName(), '=', $childTable.'.'.$childFieldId);
             });
 
         return $dryRun ? $query->count() : $query->delete();
@@ -116,14 +116,14 @@ class Morph
      */
     protected function getValidMorphRelationsFromModel(Model $model): array
     {
-        if (!method_exists($model, 'getCascadingDeletes')) {
+        if (! method_exists($model, 'getCascadingDeletes')) {
             return [];
         }
 
         $relations = [];
 
         foreach ($model->getCascadingDeletes() as $relationshipName) {
-            if (!method_exists($model, $relationshipName)) {
+            if (! method_exists($model, $relationshipName)) {
                 continue;
             }
 
@@ -145,7 +145,7 @@ class Morph
         $paths = config('cascade-delete.models_paths', [app_path('Models'), app_path()]);
 
         foreach ($paths as $path) {
-            if (!is_dir($path)) {
+            if (! is_dir($path)) {
                 continue;
             }
 

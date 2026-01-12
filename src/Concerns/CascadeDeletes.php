@@ -175,6 +175,6 @@ trait CascadeDeletes
      */
     public function clearOrphanMorphRelations(bool $dryRun = false): int
     {
-        return (new Morph())->clearOrphanByModel($this, $dryRun);
+        return (new Morph)->clearOrphanByModel($this, $dryRun);
     }
 }

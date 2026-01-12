@@ -21,7 +21,7 @@ class CascadeDeleteCleanCommand extends Command
             $this->info('Dry run mode enabled. No records will be deleted.');
         }
 
-        $morph = new Morph();
+        $morph = new Morph;
         $deleted = $morph->clearOrphanAllModels($dryRun);
 
         $message = $dryRun
