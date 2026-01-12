@@ -20,7 +20,7 @@ permissions:
 jobs:
   php-code-styling:
     runs-on: ubuntu-latest
-    if: (github.event_name == 'push' || github.event_name == 'pull_request') && !contains(github.event.head_commit.message, 'chore(main): release')
+    if: ${{ (github.event_name == 'push' || github.event_name == 'pull_request') && !contains(github.event.head_commit.message, 'chore(main): release') }}
     timeout-minutes: 5
     steps:
       - name: Checkout code
@@ -39,7 +39,7 @@ jobs:
   phpstan:
     name: PHPStan
     runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request_target' && !contains(github.event.head_commit.message, 'chore(main): release')
+    if: ${{ github.event_name != 'pull_request_target' && !contains(github.event.head_commit.message, 'chore(main): release') }}
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
@@ -58,7 +58,7 @@ jobs:
 
   tests:
     runs-on: ${{ matrix.os }}
-    if: github.event_name != 'pull_request_target' && !contains(github.event.head_commit.message, 'chore(main): release')
+    if: ${{ github.event_name != 'pull_request_target' && !contains(github.event.head_commit.message, 'chore(main): release') }}
     timeout-minutes: 10
     strategy:
       fail-fast: true
@@ -130,7 +130,7 @@ jobs:
   release:
     needs: [phpstan, tests]
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && (success() || contains(github.event.head_commit.message, 'chore(main): release'))
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && (success() || contains(github.event.head_commit.message, 'chore(main): release')) }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
