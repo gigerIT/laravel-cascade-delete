@@ -106,6 +106,7 @@ trait CascadeDeletes
         $query = $relation;
 
         if ($deleteMethod === 'forceDelete' && method_exists($relation->getRelated(), 'bootSoftDeletes')) {
+            /** @phpstan-ignore-next-line */
             $query = $query->withTrashed();
         }
 
