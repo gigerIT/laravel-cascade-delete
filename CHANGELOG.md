@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.1](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.2.0...v1.2.1) (2026-01-16)
+
+
+### Bug Fixes
+
+* correct author name casing in composer.json ([63a1a7d](https://github.com/gigerIT/laravel-cascade-delete/commit/63a1a7d576185c0e4a6ffc78afebbd909ab2ed05))
+
+
+### Miscellaneous Chores
+
+* update Pest package version constraints in composer.json and modify CI workflow ([443ff4b](https://github.com/gigerIT/laravel-cascade-delete/commit/443ff4b1664e85473105415de75ef35c8ed96ced))
+* update PHP version requirements in composer.json and CI configuration ([f835408](https://github.com/gigerIT/laravel-cascade-delete/commit/f83540831cc0c3637b63c33439b6f7b92ea45535))
+
 ## [1.2.0](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.1.0...v1.2.0) (2026-01-12)
 
 
