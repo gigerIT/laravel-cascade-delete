@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.2.1...v1.2.2) (2026-01-16)
+
+
+### Miscellaneous Chores
+
+* remove unused factory and migration stub files ([870bd32](https://github.com/gigerIT/laravel-cascade-delete/commit/870bd329411b9df15aa88d73dca46548d20c6187))
+
 ## [1.2.1](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.2.0...v1.2.1) (2026-01-16)
 
 
