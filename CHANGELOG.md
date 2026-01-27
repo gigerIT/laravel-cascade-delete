@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.2.2...v1.3.0) (2026-01-27)
+
+
+### Features
+
+* add Laravel 11 support ([b02a12d](https://github.com/gigerIT/laravel-cascade-delete/commit/b02a12d4878bb59b8d2e7dea61b9551383672d00))
+
+
+### Bug Fixes
+
+* Update phpstan.neon.dist to exclude removed database dir ([4272b1b](https://github.com/gigerIT/laravel-cascade-delete/commit/4272b1b5928deb74e095d3b726d6a4eb579cc28e))
+
 ## [1.2.2](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.2.1...v1.2.2) (2026-01-16)
 
 
