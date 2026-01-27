@@ -23,7 +23,7 @@ The main advantage of this package over others is its **unified approach**. Whil
 
 ## Requirements
 
-- PHP 8.4 or higher
+- PHP 8.2 or higher
 - Laravel 12.x
 
 ## Installation
@@ -47,7 +47,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Model
 {
-    use SoftDeletes, CascadeDeletes;
+    use SoftDeletes;
+    use CascadeDeletes;
 
     protected $cascadeDeletes = [
         'posts',      // HasMany
