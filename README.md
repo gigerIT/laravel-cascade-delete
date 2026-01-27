@@ -24,7 +24,7 @@ The main advantage of this package over others is its **unified approach**. Whil
 ## Requirements
 
 - PHP 8.2 or higher
-- Laravel 12.x
+- Laravel 11.x or higher
 
 ## Installation
 
