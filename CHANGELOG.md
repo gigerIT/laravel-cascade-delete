@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.3.0...v1.3.1) (2026-01-31)
+
+
+### Miscellaneous Chores
+
+* Update composer.json with correct testbench version for laravel 11 ([7a012d9](https://github.com/gigerIT/laravel-cascade-delete/commit/7a012d9ff93f24d41b43d843dfc694957973aa5a))
+
 ## [1.3.0](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.2.2...v1.3.0) (2026-01-27)
 
 
