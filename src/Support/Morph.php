@@ -60,7 +60,7 @@ class Morph
     /**
      * Get the classes that use the trait CascadeDelete.
      *
-     * @return \Illuminate\Database\Eloquent\Model[]
+     * @return Model[]
      */
     protected function getCascadeDeleteModels(): array
     {
@@ -127,7 +127,7 @@ class Morph
     /**
      * Fetch polymorphic relationships from a Model.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\Relation[]
+     * @return Relation[]
      */
     protected function getValidMorphRelationsFromModel(Model $model): array
     {
