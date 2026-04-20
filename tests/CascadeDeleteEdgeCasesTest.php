@@ -4,7 +4,9 @@ namespace Gigerit\LaravelCascadeDelete\Tests;
 
 use Gigerit\LaravelCascadeDelete\Exceptions\CascadeDeleteException;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Comment;
+use Gigerit\LaravelCascadeDelete\Tests\Models\Image;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Post;
+use Gigerit\LaravelCascadeDelete\Tests\Models\Profile;
 use Gigerit\LaravelCascadeDelete\Tests\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -136,7 +138,7 @@ it('cascades deletes to morphOne relationships', function () {
 
         public function singleImage()
         {
-            return $this->morphOne(\Gigerit\LaravelCascadeDelete\Tests\Models\Image::class, 'imageable');
+            return $this->morphOne(Image::class, 'imageable');
         }
 
         public function getMorphClass()
@@ -146,7 +148,7 @@ it('cascades deletes to morphOne relationships', function () {
     };
 
     // Create an image for this post
-    \Gigerit\LaravelCascadeDelete\Tests\Models\Image::create([
+    Image::create([
         'url' => 'single.jpg',
         'imageable_id' => $post->id,
         'imageable_type' => Post::class,
@@ -157,7 +159,7 @@ it('cascades deletes to morphOne relationships', function () {
 
     $postInstance?->delete();
 
-    expect(\Gigerit\LaravelCascadeDelete\Tests\Models\Image::where('url', 'single.jpg')->count())->toBe(0);
+    expect(Image::where('url', 'single.jpg')->count())->toBe(0);
 });
 
 it('handles mixed soft and hard deletes in cascade chain', function () {
@@ -171,7 +173,7 @@ it('handles mixed soft and hard deletes in cascade chain', function () {
 
     expect(User::withTrashed()->find($user->id)->deleted_at)->not->toBeNull();
     expect(Post::withTrashed()->find($post->id)->deleted_at)->not->toBeNull();
-    expect(\Gigerit\LaravelCascadeDelete\Tests\Models\Image::find($image->id))->toBeNull();
+    expect(Image::find($image->id))->toBeNull();
 });
 
 it('handles circular dependencies by not re-deleting what is already deleted', function () {
@@ -190,7 +192,7 @@ it('handles circular dependencies by not re-deleting what is already deleted', f
         protected $cascadeDeletes = ['profile'];
     };
 
-    $circularProfile = new class extends \Gigerit\LaravelCascadeDelete\Tests\Models\Profile
+    $circularProfile = new class extends Profile
     {
         protected $table = 'profiles';
 
@@ -203,7 +205,7 @@ it('handles circular dependencies by not re-deleting what is already deleted', f
 
         public function getMorphClass()
         {
-            return \Gigerit\LaravelCascadeDelete\Tests\Models\Profile::class;
+            return Profile::class;
         }
     };
 

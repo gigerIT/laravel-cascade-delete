@@ -2,6 +2,7 @@
 
 namespace Gigerit\LaravelCascadeDelete;
 
+use Gigerit\LaravelCascadeDelete\Commands\CascadeDeleteCleanCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -17,6 +18,6 @@ class LaravelCascadeDeleteServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-cascade-delete')
             ->hasConfigFile()
-            ->hasCommand(\Gigerit\LaravelCascadeDelete\Commands\CascadeDeleteCleanCommand::class);
+            ->hasCommand(CascadeDeleteCleanCommand::class);
     }
 }
