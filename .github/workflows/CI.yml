@@ -140,7 +140,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Release Please
-        uses: googleapis/release-please-action@v4
+        uses: googleapis/release-please-action@v5
         with:
           release-type: php
           token: ${{ secrets.GITHUB_TOKEN }}
