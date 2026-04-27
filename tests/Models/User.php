@@ -2,15 +2,17 @@
 
 namespace Gigerit\LaravelCascadeDelete\Tests\Models;
 
+use Carbon\Carbon;
 use Gigerit\LaravelCascadeDelete\Concerns\CascadeDeletes;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @property \Illuminate\Database\Eloquent\Collection|\Gigerit\LaravelCascadeDelete\Tests\Models\Post[] $posts
- * @property \Illuminate\Database\Eloquent\Collection|\Gigerit\LaravelCascadeDelete\Tests\Models\Role[] $roles
- * @property \Gigerit\LaravelCascadeDelete\Tests\Models\Profile $profile
- * @property \Carbon\Carbon|null $deleted_at
+ * @property Collection|Post[] $posts
+ * @property Collection|Role[] $roles
+ * @property Profile $profile
+ * @property Carbon|null $deleted_at
  */
 class User extends Model
 {
