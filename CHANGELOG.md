@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.3.2](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.3.1...v1.3.2) (2026-05-06)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump dependabot/fetch-metadata from 2.5.0 to 3.1.0 ([3832248](https://github.com/gigerIT/laravel-cascade-delete/commit/3832248c561d0401e483147a8c901a904eb32a14))
+* **deps:** bump dependabot/fetch-metadata from 2.5.0 to 3.1.0 ([bb0d3b9](https://github.com/gigerIT/laravel-cascade-delete/commit/bb0d3b9d8fa5978e511f9f7de72a06382276f203))
+* **deps:** bump googleapis/release-please-action from 4 to 5 ([c1c18f3](https://github.com/gigerIT/laravel-cascade-delete/commit/c1c18f3527a961de51271781239aca8d751f5cf4))
+* **deps:** bump googleapis/release-please-action from 4 to 5 ([4046c4f](https://github.com/gigerIT/laravel-cascade-delete/commit/4046c4f737c8175f453fccb26dba5c9031e674fa))
+* **deps:** bump ramsey/composer-install from 3 to 4 ([cc88584](https://github.com/gigerIT/laravel-cascade-delete/commit/cc88584f797747a90ebb6008f6150497a81a96a7))
+* **deps:** bump ramsey/composer-install from 3 to 4 ([3268776](https://github.com/gigerIT/laravel-cascade-delete/commit/32687765691b798977f78f6c26a9b86f42fbf68b))
+* Update composer.json and CI configuration to support Laravel 13 ([422f24f](https://github.com/gigerIT/laravel-cascade-delete/commit/422f24f4d5ed2c06d106b5e5188051b794230574))
+* Update dependabot configuration to support multi-ecosystem groups and patterns ([e715680](https://github.com/gigerIT/laravel-cascade-delete/commit/e71568077a407810d7f278886702b1ec37123dcf))
+
 ## [1.3.1](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.3.0...v1.3.1) (2026-01-31)
 
 
