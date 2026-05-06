@@ -24,7 +24,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.head_ref || github.ref }}
 
@@ -32,7 +32,7 @@ jobs:
         uses: aglipanci/laravel-pint-action@2.6
 
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: Fix styling
 
@@ -42,7 +42,7 @@ jobs:
     if: "github.event_name != 'pull_request_target' && (github.event.head_commit == null || !contains(github.event.head_commit.message, 'chore(main): release'))"
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -87,7 +87,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -142,7 +142,7 @@ jobs:
     if: "github.event_name == 'push' && github.ref == 'refs/heads/main'"
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Release Please
         uses: googleapis/release-please-action@v5
