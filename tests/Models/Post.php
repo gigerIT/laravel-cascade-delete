@@ -2,13 +2,15 @@
 
 namespace Gigerit\LaravelCascadeDelete\Tests\Models;
 
+use Carbon\Carbon;
 use Gigerit\LaravelCascadeDelete\Concerns\CascadeDeletes;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * @property \Illuminate\Database\Eloquent\Collection|\Gigerit\LaravelCascadeDelete\Tests\Models\Comment[] $comments
- * @property \Carbon\Carbon|null $deleted_at
+ * @property Collection|Comment[] $comments
+ * @property Carbon|null $deleted_at
  */
 class Post extends Model
 {

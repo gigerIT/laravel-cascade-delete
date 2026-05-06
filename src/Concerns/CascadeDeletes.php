@@ -34,7 +34,7 @@ trait CascadeDeletes
      *
      * @return void
      *
-     * @throws \Gigerit\LaravelCascadeDelete\Exceptions\CascadeDeleteException
+     * @throws CascadeDeleteException
      */
     protected function validateCascadingDeletes()
     {
