@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.3](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.3.2...v1.3.3) (2026-05-06)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump the dependencies group with 2 updates ([2743a34](https://github.com/gigerIT/laravel-cascade-delete/commit/2743a34f53cc694986d21beb48771069c06e7d0d))
+
 ## [1.3.2](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.3.1...v1.3.2) (2026-05-06)
 
 
