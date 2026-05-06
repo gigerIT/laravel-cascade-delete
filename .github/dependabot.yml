@@ -2,18 +2,24 @@
 # https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
 version: 2
+
+multi-ecosystem-groups:
+  dependencies:
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+
 updates:
 
   - package-ecosystem: "github-actions"
     directory: "/"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
+    patterns:
+      - "*"
+    multi-ecosystem-group: "dependencies"
 
   - package-ecosystem: "composer"
     directory: "/"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "dependencies"
+    patterns:
+      - "*"
+    multi-ecosystem-group: "dependencies"
