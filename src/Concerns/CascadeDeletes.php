@@ -11,13 +11,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
+/**
+ * @property array $cascadeDeletes
+ */
 trait CascadeDeletes
 {
-    /**
-     * The relationships that should cascade on delete.
-     */
-    protected array $cascadeDeletes = [];
-
     /**
      * Boot the trait.
      *
@@ -57,7 +55,7 @@ trait CascadeDeletes
     {
         $forceDeleting = $this->isCascadeDeletesForceDeleting();
 
-        foreach ($this->cascadeDeletes as $relationship) {
+        foreach ($this->getCascadingDeletes() as $relationship) {
             $this->cascadeDeletes($relationship, $forceDeleting);
         }
     }
@@ -163,9 +161,17 @@ trait CascadeDeletes
      */
     protected function hasInvalidCascadingRelationships(): array
     {
-        return array_filter($this->cascadeDeletes, function ($relationship) {
+        return array_filter($this->getCascadingDeletes(), function ($relationship) {
             return ! method_exists($this, $relationship) || ! $this->{$relationship}() instanceof Relation;
         });
+    }
+
+    /**
+     * Get the cascading relationship definitions.
+     */
+    public function getCascadingDeletes(): array
+    {
+        return isset($this->cascadeDeletes) ? (array) $this->cascadeDeletes : [];
     }
 
     /**
