@@ -158,13 +158,20 @@ class Morph
     protected function loadModels(): void
     {
         $paths = config('cascade-delete.models_paths', [app_path('Models'), app_path()]);
+        $excludedDirectories = config('cascade-delete.models_excluded_directories', ['Tests', 'tests']);
 
         foreach ($paths as $path) {
             if (! is_dir($path)) {
                 continue;
             }
 
-            foreach (Finder::create()->files()->in($path)->name('*.php') as $file) {
+            $files = Finder::create()->files()->in($path)->name('*.php');
+
+            if ($excludedDirectories !== []) {
+                $files->exclude($excludedDirectories);
+            }
+
+            foreach ($files as $file) {
                 require_once $file->getRealPath();
             }
         }

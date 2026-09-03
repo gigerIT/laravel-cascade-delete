@@ -2,6 +2,7 @@
 
 use Gigerit\LaravelCascadeDelete\Tests\Models\Image;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Post;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
 
 it('cleans residual morph relations for a specific model instance', function () {
@@ -53,3 +54,34 @@ it('reports residual morph relations via command dry-run', function () {
     expect($output)->toContain('Found 1 residual polymorphic records');
     expect(Image::count())->toBe(1);
 });
+
+it('skips excluded directories while discovering models', function (string $directory, ?array $configuredExclusions) {
+    $filesystem = new Filesystem;
+    $root = sys_get_temp_dir().'/cascade-delete-'.bin2hex(random_bytes(8));
+    $filesystem->makeDirectory($root.'/'.$directory, 0755, true);
+    file_put_contents($root.'/Loadable.php', '<?php $GLOBALS[\'cascade_delete_loadable_fixture\'] = true;');
+    file_put_contents($root.'/'.$directory.'/Explodes.php', '<?php throw new RuntimeException(\'Excluded fixture was loaded.\');');
+    unset($GLOBALS['cascade_delete_loadable_fixture']);
+
+    if ($configuredExclusions === null) {
+        config(['cascade-delete' => ['models_paths' => [$root]]]);
+    } else {
+        config([
+            'cascade-delete.models_paths' => [$root],
+            'cascade-delete.models_excluded_directories' => $configuredExclusions,
+        ]);
+    }
+
+    try {
+        Artisan::call('cascade-delete:clean', ['--dry-run' => true]);
+
+        expect($GLOBALS['cascade_delete_loadable_fixture'] ?? false)->toBeTrue();
+    } finally {
+        unset($GLOBALS['cascade_delete_loadable_fixture']);
+        $filesystem->deleteDirectory($root);
+    }
+})->with([
+    'default uppercase Tests directory' => ['Tests', null],
+    'default lowercase tests directory' => ['tests', null],
+    'consumer-configured directory' => ['Specifications', ['Specifications']],
+]);

@@ -127,8 +127,15 @@ return [
     'models_paths' => [
         app_path(),
     ],
+
+    'models_excluded_directories' => [
+        'Tests',
+        'tests',
+    ],
 ];
 ```
+
+Directories named `Tests` or `tests` are skipped during model discovery. Add other non-runtime directories to `models_excluded_directories` when needed.
 
 ## Handling Failures
 
