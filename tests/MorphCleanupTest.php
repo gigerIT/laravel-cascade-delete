@@ -64,6 +64,7 @@ it('skips excluded directories while discovering models', function (string $dire
     file_put_contents($root.'/Loadable.php', '<?php $GLOBALS[\'cascade_delete_loadable_fixture\'] = true;');
     file_put_contents($root.'/'.$directory.'/Explodes.php', '<?php throw new RuntimeException(\'Excluded fixture was loaded.\');');
     unset($GLOBALS['cascade_delete_loadable_fixture']);
+    $originalConfig = config('cascade-delete');
 
     if ($configuredExclusions === null) {
         config(['cascade-delete' => ['models_paths' => [$root]]]);
@@ -80,6 +81,7 @@ it('skips excluded directories while discovering models', function (string $dire
         expect($GLOBALS['cascade_delete_loadable_fixture'] ?? false)->toBeTrue();
     } finally {
         unset($GLOBALS['cascade_delete_loadable_fixture']);
+        config(['cascade-delete' => $originalConfig]);
         $filesystem->deleteDirectory($root);
     }
 })->with([
