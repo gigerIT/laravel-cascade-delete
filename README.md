@@ -135,7 +135,9 @@ return [
 ];
 ```
 
-Directories named `Tests` or `tests` are skipped during model discovery. Add other non-runtime directories to `models_excluded_directories` when needed.
+Directory names are excluded at any depth. Directory paths are relative to each configured model path. Add other non-runtime directories to `models_excluded_directories` when needed.
+
+Model discovery still loads every PHP file outside the excluded directories, so keep `models_paths` as narrow as possible.
 
 ## Handling Failures
 

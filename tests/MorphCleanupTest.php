@@ -1,7 +1,9 @@
 <?php
 
+use Gigerit\LaravelCascadeDelete\Support\Morph;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Image;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Post;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Artisan;
 
@@ -85,3 +87,49 @@ it('skips excluded directories while discovering models', function (string $dire
     'default lowercase tests directory' => ['tests', null],
     'consumer-configured directory' => ['Specifications', ['Specifications']],
 ]);
+
+it('discovers nested models using the cascade trait indirectly across configured paths', function () {
+    $filesystem = new Filesystem;
+    $root = sys_get_temp_dir().'/cascade-delete-'.bin2hex(random_bytes(8));
+    $filesystem->makeDirectory($root.'/Domain/Models', 0755, true);
+    file_put_contents($root.'/Domain/Models/NestedModel.php', <<<'PHP'
+<?php
+
+namespace Gigerit\LaravelCascadeDelete\Tests\Fixtures;
+
+class NestedModel extends \Gigerit\LaravelCascadeDelete\Tests\Models\Post
+{
+    protected $cascadeDeletes = [];
+}
+PHP);
+
+    config([
+        'cascade-delete.models_paths' => [
+            $root.'/missing',
+            __DIR__.'/Models',
+            $root,
+        ],
+    ]);
+
+    $morph = new class extends Morph
+    {
+        /**
+         * @return Model[]
+         */
+        public function getModels(): array
+        {
+            return $this->getCascadeDeleteModels();
+        }
+    };
+
+    try {
+        $models = array_filter(
+            $morph->getModels(),
+            fn (Model $model): bool => $model::class === 'Gigerit\LaravelCascadeDelete\Tests\Fixtures\NestedModel',
+        );
+
+        expect($models)->toHaveCount(1);
+    } finally {
+        $filesystem->deleteDirectory($root);
+    }
+});
