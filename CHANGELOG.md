@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.4](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.3.3...v1.3.4) (2026-09-03)
+
+
+### Bug Fixes
+
+* use soft-delete public API ([1e6ec39](https://github.com/gigerIT/laravel-cascade-delete/commit/1e6ec39f7e42d42b3f1a1c74ef928e4721887cd1))
+
 ## [1.3.3](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.3.2...v1.3.3) (2026-09-03)
 
 
