@@ -1,12 +1,30 @@
 <?php
 
+use Gigerit\LaravelCascadeDelete\Concerns\CascadeDeletes;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Comment;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Image;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Post;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Profile;
 use Gigerit\LaravelCascadeDelete\Tests\Models\Role;
 use Gigerit\LaravelCascadeDelete\Tests\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+
+class HardDeletingPost extends Model
+{
+    use CascadeDeletes;
+
+    protected $table = 'posts';
+
+    protected $guarded = [];
+
+    protected $cascadeDeletes = ['comments'];
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'post_id');
+    }
+}
 
 it('cascades deletes to hasOne relationships', function () {
     $user = User::create(['name' => 'John Doe']);
@@ -18,6 +36,16 @@ it('cascades deletes to hasOne relationships', function () {
 
     expect(User::find($user->id))->toBeNull();
     expect(Profile::where('user_id', $user->id)->count())->toBe(0);
+});
+
+it('cascades deletes from models without soft deletes', function () {
+    $post = HardDeletingPost::create(['title' => 'Post 1']);
+    $comment = $post->comments()->create(['body' => 'Comment 1']);
+
+    $post->delete();
+
+    expect(HardDeletingPost::find($post->getKey()))->toBeNull()
+        ->and(Comment::withTrashed()->find($comment->id)?->deleted_at)->not->toBeNull();
 });
 
 it('cascades deletes to hasMany relationships', function () {
