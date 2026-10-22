@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.5](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.3.4...v1.3.5) (2026-10-22)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump actions/checkout from 6 to 7 in the dependencies group ([692ec31](https://github.com/gigerIT/laravel-cascade-delete/commit/692ec3109901fa90af3906336c388d003abad916))
+
 ## [1.3.4](https://github.com/gigerIT/laravel-cascade-delete/compare/v1.3.3...v1.3.4) (2026-09-03)
 
 
